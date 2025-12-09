@@ -1,14 +1,21 @@
 # make-ghpy
 ###### Github Action to create Grasshopper-Python `.ghpy` plugin.
 [![Test Action](https://github.com/thekaushikls/make-ghpy/actions/workflows/test_action.yml/badge.svg)](https://github.com/thekaushikls/make-ghpy/actions/workflows/test_action.yml)
+[![Dispatch Action](https://github.com/thekaushikls/make-ghpy/actions/workflows/dispatch_action.yml/badge.svg)](https://github.com/thekaushikls/make-ghpy/actions/workflows/dispatch_action.yml)
+[![release)](https://img.shields.io/github/v/release/thekaushikls/make-ghpy?include_prereleases)](https://github.com/thekaushikls/make-ghpy/releases/latest)
+[![GitHub](https://img.shields.io/github/license/thekaushikls/make-ghpy)](https://github.com/thekaushikls/make-ghpy/blob/main/LICENSE)
 
 * Collects all python (.py) files recursively from the specified `source` folder.
 * Uses `CLR` to compile to a `.ghpy` (or `.dll`) binary.
-* Outputs `build_path` of the binary for downstream use.
+* Outputs 
+  1. `name` of the compiled binary _(without file extension)_
+  2. `full-name` of the compiled binary.
+  3. `build` of the compiled binary for downstream use.
+  
 
 ## 🚀 Quick reference
 ``` YML
-- uses: thekaushikls/make-ghpy
+- uses: thekaushikls/make-ghpy@v1.0.1
   with:
     source: src
     package-name: my_plugin
@@ -18,9 +25,10 @@
 ```
 
 ## 🎛️ Usage
-See [action.yml](https://github.com/thekaushikls/make-ghpy/blob/main/action.yml)
+See [test_action.yml](.github/workflows/test_action.yml) for example.
+
 ``` YML
-- uses: thekaushikls/make-ghpy
+- uses: thekaushikls/make-ghpy@v1.0.1
   with:
   
     # Root folder for python source.

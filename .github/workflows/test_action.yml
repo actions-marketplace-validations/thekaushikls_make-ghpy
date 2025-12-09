@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - develop
 
 jobs:
   build:
@@ -13,6 +14,10 @@ jobs:
     - name: Checkout Repo
       uses: actions/checkout@v3
 
+    - name: Install IronPython
+      shell: pwsh
+      run: choco install ironpython --version=2.7.12
+    
     - name: Build Plugin
       id: build-plugin
       uses: ./
@@ -21,10 +26,12 @@ jobs:
         package-name: plugin
         version: v0.0.1-alpha
         type: ghpy
-        ironpython: true
+        ironpython: false
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: plugin-v0.0.1-alpha
-        path: ${{steps.build-plugin.outputs.build}}
+        name: ${{ steps.build-plugin.outputs.name }}
+        path: ${{ steps.build-plugin.outputs.build }}
+        if-no-files-found: error
+        retention-days: 1
